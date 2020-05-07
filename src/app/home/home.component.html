@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-md-6">
+            <span *ngIf="msgs.length > 0">
+                
+                    <span *ngFor="let msg of msgs">
+                        <p [ngStyle]="(msg.receiver == myuserId) ?  { 'text-align' : 'left'} : { 'text-align' : 'right' }" style="font-size: large;">
+                        {{ msg.msg }}<br>
+                        {{ msg.createdOn.getHours() }} : {{ msg.createdOn.getMinutes() }}
+                        </p>
+                    </span> 
+                
+            </span>
+            <p *ngIf="typing"> {{ typemsg }}</p>
+            Enter message here...<br>
+            <textarea [(ngModel)]="msg" (input)="sendTyping()"></textarea><br><br>
+            <button (click)="send()">Send</button>
+        </div>
+    </div>
+    <h3>Create Group</h3>
+    <input type="text" [(ngModel)]="groupName"><br><br>
+    select members...<br>
+    <p *ngFor="let user of users">
+        <input type="checkbox" name="users" [value]="user.userId" [(ngModel)]=user.selected>{{ user.name }}
+    </p>
+    <button (click)="createGroup()">Create Group</button>
+    <br>
+    <h3>My Groups</h3>
+    <span *ngFor="let group of myGroups">
+        <a [routerLink]="['/user/group',group.name]">{{ group.name }}</a><br>
+    </span>
+    <!-- <a *ngFor="let group myGroups" [routerLink]="['user/group/',group.name]">{{ group.name }}</a> -->
+</div>
+

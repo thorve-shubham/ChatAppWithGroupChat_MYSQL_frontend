@@ -1,0 +1,16 @@
+<div class="col-md-6">
+    <span *ngIf="msgs.length > 0">
+        
+            <span *ngFor="let msg of msgs">
+                <p [ngStyle]="(msg.sender == myuserId) ?  { 'text-align' : 'right'} : { 'text-align' : 'left' }" style="font-size: large;">
+                {{ msg.msg }}<br>
+                {{ msg.createdOn.getHours() }} : {{ msg.createdOn.getMinutes() }}
+                </p>
+            </span> 
+        
+    </span>
+    <p *ngIf="typing"> {{ typingMsg }}</p>
+    Enter message here...<br>
+    <textarea [(ngModel)]="msg" (input)="sendTyping()"></textarea><br><br>
+    <button (click)="send()">Send</button>
+</div>
